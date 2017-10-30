@@ -1,28 +1,42 @@
 Answer each question in a written format
 
 1. What does semantic HTML mean?
+    Web Semantics is a series of standards set by the world wide web consortium(w3c) with the goal make code more reusable and similar across the internet. A big part of web semantics is using html tags that are specific to what you are doing. For instance if you are making a navigation bar you could use divs, or an unordered list tag, but it makes it easy to tell what its purpose is with a nav tag. The purpose of web semantics is to add more of meaning to your code rather than just having divs everywhere. Having a div to wrap the content of you project so you can give it margins is a very common practice in web development so instead you could you the main tag. This tag doesn't style any differently than a div tag but it makes your html have more meaning to it.
 
 2. What is the box model?
+    All css elements are basically boxes. These boxes have 4 parts to them: content, padding, border, margin. The content is the innermost part of the box model and is what the element is holding, like text, an image or sometimes empty space. The padding is an area around the content, it is used frequently to add spacing around text or images, like the margin of a word document(not margins in css). Padding rests inside of element with the content. The border is the third from the center in the box model. The border goes around the padding and the content and outside of the element. The margin is the furthest box in the box model. It rests outside of the element and is used to center elements, and add space between different elements.
 
 3. What is the difference between IDs and Classes?
+    Classes and IDs are both css selectors used to style html elements. Classes can be used multiple times throughout an html document while IDs need to be unique in each page. It is good practice to try and style using only classes and save IDs for selecting elements in javascript.
 
 4. What does the z-index do?
+    The z index is used to chose the stack of an element. The stack determines which element is in front of others. elements with a high stack are always in front of elements with a lower stack. When elements have the same stack the element that appears first in the html document will be lower.
 
 5. Summarize what the keyword 'this' is used for?
+    The this keyword is used for context, what owns the javascript code. It is used for updating objects in prototypes, and methods. The this key is determined at runtime rather than compilation, this means that it doesn't matter where the code is written but rather how it is called. If a function with the this keyword in it is called from an object the this will refer to the object, where as if it is called from a different object this will refer to the second object. If a function calls this outside of an object (Globally executed) the this will refer to the global object (ie. console.log(this)). In es5 the .bind method was introduced which will allow you to explicitly declare what this will be in a function. If you were to bind an object to a function every time the function would alter with the this keyword it would alter the object, for example binding methods in a component to this so it will alter the parent state when passed down to a child component.
 
 6. What is a callback?
+    A callback is a function that is passed into another function as a parameter. This callback function will then be called the function that it is passed into. Javascript has a lot of built in functions that rely on callback functions (e.i. reduce, filter, map, then, and many more).
 
 7. What is a closure?
+    Closures are the combination of a function and the lexical scope of that function. This gives the function access to variables that are not accessible in other ways. For example if you write a function that had a variable named name inside of the function, and returned a function called showName, you would not be able to see the name variable, but the function showName would be able to. You could also create closure functions to alter data that you do not want altered easily. Closures are a useful paradigm of javascript, because with javascripts scope being very loose, it creates variables that cannot be altered without an associated function.
 
 8. How does prototype work?
+    Prototypes work in javascript by creating a function that is associated with a type of object that can be called from that object. Prototypes are very similiar to methods, except that a method needs to be saved with each object, and a prototype only needs to be saved once in the global object. To create a prototype in javascript you would assign a function to Object.prototype.functionName. This prototype would then be called from the object it was assigned to. In this example as objectVariable.functionName (assuming objectVariable is an Object). Prototypes are also inherited from there parents, with the example above we would be able to call the function functionName from Arrays, Strings, and any object because all objects inherit from Object. Prototypes can be assigned to any type of object and all instance of that object and children of that object will have access to it, as well as the context of the prototype will be equal to the object it is called from.
 
 9. What is MVC?
+    MVC stands for Model-View-Controller. It is an architectural pattern to split web applications into three different parts. The first part Model represents the data that the application is relying on, and the logic that goes with it. For example http requests to a server to get and update data. The View is all of the UI logic and what the final user will see, for example it is the html document that the user will interact with on a web page. The third part is the Controller, it will handle all the heavy lifting of manipulating data from the model as well as getting the final data to display on the view. It will act also handle all the interactions and inputs made on the view and update the database using the model. It is what really ties the MVC architecture together.
 
 10. What is the component lifecycle?
+    The component lifecycle is a set of functions that run throughout the rendering, re-rendering, and removal of a react component. The component lifecycle runs through a series of function when the component is initially rendered, starting with getDefaultProps, getInitialState, componentWillMount, and then the component renders. Once the component renders it will run the componentDidMount function. A react component will also run a series of functions when the props are update. The first of these functions to be run on new props is componentWillReceiveProps, then shouldComponentUpdate if this function returns false no more functions will be run but if it returns true the component runs the componentWillUpdate function, and then the component rerenders. Once the component rerenders the componentDidUpdate function. When a component is removed or unmounts from the DOM the componentWillUnmount function is run. It is important to understand the react lifecycle to know how react is handling data and updating itself. for instance you are not able to always set the state of a component. You can only set the state of a component in the componentWillMount, componentDidMount, componentWillReceiveProps, and componentDidUpdate methods. Setting the state of a component will also trigger the shouldComponentUpdate function, and follow the updating functions from there. Forcing an update will start the lifecycle methods from the componentWillUpdate method.
 
 11. What is REST?
+    REST or REpresentational State Transfer, is an application that uses HTTP request to Create data, Read data, Update data, and Delete data (CRUD). An example of ReST is a Restful apis which are a way to get data from the internet and process them in you web application. Restful Apis give you the ability to access data from a server by sending a HTTP request, manipulate that data and send another request to add,modify or delete that data on a server. ReSTful Apis are very important when working with a single page application like angular or react because without one you would have no way to communicate with the database that is storing your data except on the initial load of the page.
 
 12. Name three ways of getting data from the URL using express
+    1. params
+    2. query
+    3. body
 
 create table users (
 id serial,
@@ -33,9 +47,24 @@ email varchar(255)
 12. Given the Schema above, write the following four basic CRUD db queries using postgres syntax
 
 -Get all users:
-
+    SELECT * FROM users;
 -Create a new user with the name of 'your name' and an email of 'fake@fake.com':
-
+    INSERT INTO users (
+        name,
+        email
+    )
+    VALUES (
+        'Daniel Valentine',
+        'fake@fake.com'
+    );
 -Update the newly created user's name to 'Bobby Boy':
-
+    UPDATE users
+    SET name = 'Bobby Boy'
+    WHERE
+    name='Daniel Valentine'
+    and email = 'fake@fake.com';
 -Delete the newly updated user:
+    DELETE FROM users
+    WHERE
+    name='Bobby Boy'
+    and email = 'fake@fake.com';
